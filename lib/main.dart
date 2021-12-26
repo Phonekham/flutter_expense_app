@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_expense_app/transaction.dart';
+import 'package:flutter_expense_app/widgets/user_transaction.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,9 +31,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> transactions = [
-    Transaction(id: 'id1', title: 'title1', amount: 200, date: DateTime.now())
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,28 +38,14 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Card(
             color: Colors.blue,
             child: Container(width: double.infinity, child: Text('CHART')),
             elevation: 5,
           ),
-          Column(
-            children: transactions.map((tx) {
-              return Card(
-                child: Row(
-                  children: [
-                    Container(
-                      child: Text(tx.amount.toString()),
-                    ),
-                    Column(
-                      children: [Text(tx.title), Text(tx.date.toString())],
-                    )
-                  ],
-                ),
-              );
-            }).toList(),
-          )
+          UserTransaction()
         ],
       ),
     );
