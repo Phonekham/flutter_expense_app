@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expense_app/models/transaction.dart';
 import 'package:flutter_expense_app/widgets/new_transaction.dart';
+import 'package:flutter_expense_app/widgets/transaction_list.dart';
 
 void main() {
   runApp(const MyApp());
