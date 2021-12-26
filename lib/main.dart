@@ -37,16 +37,18 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Card(
-            color: Colors.blue,
-            child: Container(width: double.infinity, child: Text('CHART')),
-            elevation: 5,
-          ),
-          UserTransaction()
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Card(
+              color: Colors.blue,
+              child: Container(width: double.infinity, child: Text('CHART')),
+              elevation: 5,
+            ),
+            UserTransaction()
+          ],
+        ),
       ),
     );
   }
