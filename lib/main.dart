@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_expense_app/models/transaction.dart';
+import 'package:flutter_expense_app/widgets/chart.dart';
 import 'package:flutter_expense_app/widgets/new_transaction.dart';
 import 'package:flutter_expense_app/widgets/transaction_list.dart';
 
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        accentColor: Colors.amber,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -34,9 +36,19 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    Transaction(id: 'id1', title: 'title1', amount: 200, date: DateTime.now()),
-    Transaction(id: 'id2', title: 'title2', amount: 300, date: DateTime.now())
+    // Transaction(id: 'id1', title: 'title1', amount: 200, date: DateTime.now()),
+    // Transaction(id: 'id2', title: 'title2', amount: 300, date: DateTime.now())
   ];
+
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
 
   void _startAddNewTransaction(BuildContext ctx) {
     showModalBottomSheet(
@@ -77,11 +89,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Card(
-              color: Colors.blue,
-              child: Container(width: double.infinity, child: Text('CHART')),
-              elevation: 5,
-            ),
+            Chart(_recentTransactions),
+            TransactionList(_userTransactions)
           ],
         ),
       ),
